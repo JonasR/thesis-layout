@@ -1,0 +1,17 @@
+*.aux
+*.bbl
+*.out
+*.toc
+*.log
+*.blg
+*.brf
+*.pyg
+_minted*
+*.pdf
+*.ilg
+*.lof
+*.lot
+*.nlo
+*.nls
+*.gin
+*.*~

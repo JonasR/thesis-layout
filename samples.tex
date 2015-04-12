@@ -1,0 +1,81 @@
+\chapter{Samples}
+\label{cp:samples}
+Potentially something introductory here
+\section{This is a section}
+\label{sec:samplesec}
+\subsection{And this is a subsection}
+\label{sec:asubsec}
+We should probably not go deeper than this.
+\subsection{Floats}
+\label{sec:floats}
+A general note on captions: Every caption should have a basic descriptive introduction sentence. Following upon this are at least three more sentences describing the float.
+These should enable the reader to understand the float without having to read the text where the float is referred to. Captions are what people are most likely to read, so make those count.
+Captions do not contain (large amounts of) analysis, this belongs in the result section. Methodology only as much as needed, not too much. Captions have enough information to understand
+what is shown without having to refer to the text.
+
+A sample Figure can be seen in \Vref{fig:samplefig}. Some results are shown in \Vref{fig:samplefig}. One could also say there are some results (\Vref{fig:samplefig}). Actively, as in
+\Vref{fig:samplefig} shows that this is possible and so on, is possible as well, however do not make the Figure the subject of the text, write some statement and then refer to the Figure in the end. Also do not overuse varioref as I am here.
+\begin{figure}[t]
+ \centering
+ %.pdf will work as well, anything else is converted ideally
+ %png transparency will throw an error but work nonetheless
+ \includegraphics[]{Henohenomoheji.png} % Generally using width=\textwidth is probably a good idea. And of course use vector graphics whenever possible. .eps will automatically be converted to pdf
+ \caption[\figintro{A simple face made up of hiragana.}]{\figintro{A simple face made up of hiragana.} Henohenomoheji or hehenonomoheji is a face drawn by Japanese schoolchildren 
+ using hiragana characters. It consists of seven hiragana. This caption should always contain at least three sentences.}
+ \label{fig:samplefig}
+\end{figure}
+
+A sample Table is shown in \Vref{tbl:sampletbl}.
+\begin{table}[tb]
+ \centering
+ \begin{threeparttable}
+ \caption[\figintro{This is a sample table.}]{\figintro{This is a sample table.} Sentence 1,2,3.}
+  \begin{tabularx}{\textwidth}{ll>{$}l<{$}X}
+   \toprule
+   \textbf{Column 1} & \textbf{Column 2} & \textbf{All math} & \textbf{this autolinebreaked}\\
+   \midrule
+   Data 2 & Data 3 & 42^{2} & This is a longish text to show that this will automatically break the line as needed. However, using tabularx with textwidth also means, that we will always extend the full page which might
+not always look very nice...\\
+   a & b & 120 & We can also use notes\tnote{1}, crazy huh\tnote{2} yay\tnote{3}\\
+   \bottomrule
+  \end{tabularx}
+   \begin{tablenotes}
+    \item [1] This is a footnote. When all long
+    \item [2] consider putting all of them below eachother using \texttt{begin{threeparttable}[normal]}
+    \item [3] but this is probably nicer for many smaller ones
+   \end{tablenotes}
+   \label{tbl:sampletbl}
+  \end{threeparttable}
+\end{table}
+
+There is some python magic in \Vref{lst:sample}.
+
+\begin{listing}[!ht]
+ \begin{minted}{python}
+ #!/usr/bin/env python
+ import antigravity
+ print https://xkcd.com/353/
+ \end{minted}
+\caption[\figintro{This is a sample listing.}]{\figintro{This is a sample listing.} Sentence 1,2,3}
+\label{lst:sample}
+\end{listing}
+
+Some random math in \Vref{eq:hval}.
+\begin{align}
+HVAL(L;pid) = pid -
+\begin{cases} 
+   100 & \text{for } L \leq 11\\
+   480 \cdot L^{-0.32(1+\exp{(\nicefrac{-L}{1000})})} & \text{for } 11 < L \leq 450\\
+   19.5 & \text{for } L > 450
+  \end{cases}\label{eq:hval}
+\end{align}
+
+\subsection{Referencing stuff} %Citations
+A single citation looks like this \citep{Kall2005}. Here are several citations at once \citep{Hofacker1994, Kall2005}. We can also reference a website \citep{CodonW}. See \href{http://merkel.zoneo.net/Latex/natbib.php}{here} for a full list of supported citation commands
+by natbib.
+
+\ids in databases are less ambiguous in a sans-serif font, better use custom command dbid so it looks like this: \dbid{a037O} not a037O.
+
+There are also automatically inserted abbreviations, they are used by simply using the word such as \abbr{TMH}{Transmembrane helix} with that command. Now, if we later want to reference to this again,
+we could use \abref{TMH} as such, but we should not overuse that, if at all. Something like once per section/chapter should be fine, in case someone crossreads the thing.  Make sure though
+that the abbreviation is introduced in the text, before being used, and that the link goes to that first introduction.

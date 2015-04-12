@@ -1,0 +1,295 @@
+\documentclass[12pt, twoside, openright, fleqn, a4paper]{book}		%fleqn is for left aligned equations
+
+%TODO Change these
+\newcommand{\authorFullName}{Author name}
+\newcommand{\titleFull}{A title}
+
+%%General
+\usepackage[includehead, margin=2.5cm]{geometry}
+\usepackage{graphicx,amsmath}   % no amssymb,amsfonts since we load mathdesign below which should provide everything
+% \usepackage{amsthm}           %Theorem environments, currently unused
+\usepackage[space]{grffile}     %Better filename support for graphicx
+\usepackage[group-separator={,}]{siunitx}
+% \usepackage[mathletters]{ucs}         % Unicode in math environments, currently unused
+\usepackage[usenames, dvipsnames]{xcolor}
+
+%%Colors
+\definecolor{titlecolor}{HTML}{9D102D} %equiv RGB 157, 16, 45
+
+%%Encoding, locals, font
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{charter}                %Heavier font
+% \usepackage{MinionPro}            %Alternative font (part of debian package 'texlive-fonts-extra')
+% \usepackage{bookman}              %Alternative font
+\usepackage[scaled]{helvet}         %Set sans serif font to Helvetica
+\usepackage[charter]{mathdesign}    %Set math font to charter (same as serif document font)
+\usepackage{microtype}              %Use larger letterspacing with lsstyle, requires mathdesign.sty (debian package texlive-fonts-extra)
+
+%%Table of contents layout
+\usepackage[subfigure]{tocloft}
+\renewcommand{\cfttoctitlefont}{\bfseries\lsstyle\scshape\Huge}   %Redefine look of the word 'Contents' to match with the style used for other chapters (defined below at titlesec setup)
+\usepackage{titletoc}
+\titlecontents{chapter}
+[0pt]
+{\addvspace{1pc}}%
+{\contentsmargin{0pt}%
+\usefont{T1}{bch}{b}{n}\selectfont
+\bfseries\lsstyle
+\makebox[0pt][r]{\huge\thecontentslabel\enspace}\large}
+{\contentsmargin{0pt}\large}
+% {\quad\thepage}
+{}
+
+%Use below if sections are long enough to mark them more prominently in the toc
+% \titlecontents{section}
+% [0pt]
+% {\addvspace{.5pc}}%
+% {\contentsmargin{0pt}%
+% \usefont{T1}{bch}{b}{n}\selectfont
+% \makebox[0pt][r]{\thecontentslabel\enspace}}
+% {\contentsmargin{0pt}\large}
+% {\dotfill\thepage}
+% []
+
+%%Headline layout
+\usepackage[sc]{titlesec}
+
+\newcommand{\chaptersize}{\fontsize{10cm}{1em}\selectfont}
+
+% \renewcommand{\thechapter}{\Roman{chapter}}
+\titleformat{\chapter}[display]
+{\bfseries\lsstyle\scshape\Huge}
+% {\filleft\Large\chaptertitlename\hspace{0.8cm}\Huge\thechapter}                                   % No color
+{\filleft\Large\color{titlecolor}\chaptertitlename\hspace{0.8cm}\Huge\color{titlecolor}\thechapter} % Colored chapter text and number
+{2.5ex}
+{\filright}
+[\vspace{2ex}\titlerule]
+
+\titleformat{\section}[hang]{
+    \usefont{T1}{bch}{b}{n}\selectfont} % "bch" - Bitstream Charter, "b" - bold
+    {} % label
+    {0em} % horizontal separation between label and title body
+    {\hspace{-0.4pt}\large \thesection\hspace{0.6em}} % code preceding the title
+    [] % optional code following the title body
+\titleformat{\subsection}[hang]{\usefont{T1}{bch}{b}{n}\selectfont}{}{0em}{\hspace{-0.4pt}\normalsize \thesubsection\hspace{0.6em}}[]
+\titleformat{\subsubsection}[hang]{\usefont{T1}{bch}{b}{n}\selectfont}{}{0em}{\hspace{-0.4pt}\normalsize \thesubsubsection\hspace{0.6em}}[]
+% \titleformat{\subsubsubsection}[hang]{\usefont{T1}{bch}{b}{n}\selectfont}{}{0em}{\hspace{-0.4pt}\normalsize \thesubsubsubsection\hspace{0.6em}}[]
+
+%%Tables
+\usepackage{lscape, longtable}
+\usepackage{pgfplotstable}      % Read tables from files
+\pgfplotstableset{
+every head row/.style={before row=\toprule,after row=\midrule},   % add top and midrule
+every last row/.style={after row=\bottomrule},                    % add bottom rule
+%Begin header bold
+column type={>{\fontseries{bx}\selectfont}l},
+postproc cell content/.append style={ % see sec 3.2
+/pgfplots/table/@cell content/.add={\fontseries{\seriesdefault}\selectfont}{}}
+%End header bold
+}
+\pgfplotsset{compat=1.9}        %Set pgfplots compatibility to 1.9 (will give a warning of nothing is set here)
+
+\usepackage{booktabs}                   %gives \toprule, \midrule and \bottomrule for professional looking tables
+\usepackage[para]{threeparttable}       %Provides notes in tables (in addition to the caption)
+\usepackage{tabularx}                   %Defines column type X for tables with auto linebreaks. For REALLY big tables use one of the more specialized packages
+
+%%Various other things
+\usepackage{varioref}                   % This has to be loaded before hyperref and before cleverref
+\usepackage{rotating}
+\usepackage{fixltx2e}                   %adds \textsubscript{}, textsuperscript should already be there
+\usepackage{subfigure}
+\usepackage[update,prepend]{epstopdf}   %Automatic eps to pdf conversion when using .eps in includegraphics
+\usepackage{gitinfo}                    %Allows access to git information from within latex
+\usepackage{setspace}                   %Allow different line spacings
+\usepackage[titletoc]{appendix}         %Provides an environment for the appendix
+
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+
+\usepackage{caption}                              %Neat things with captions like the reference in bold and smaller fonts
+\captionsetup{margin=0.8cm,aboveskip=8mm,labelfont=bf,labelformat=default,labelsep=period,textfont=small} %Explicit labelformat=default necessary for varioref/hyperref/caption combination
+\setcounter{tocdepth}{2}                          %2 should be default anyway
+\setlength{\parskip}{1ex plus 0.5ex minus 0.5ex}  %Space of a paragraph, note the variability, gives latex more room for optimization
+\setlength{\parindent}{0pt}                       %Basically a whole lot of \noindents before every paragraph ;)
+\usepackage{nicefrac}                             %fraction style (a/b) useful for inline fractions
+\setlength{\headheight}{15pt}
+\usepackage{emptypage}                            %Empty pages are really empty, no header or anything
+\usepackage{nomencl}                              %Create nomenclature (abbreviations) list, leave away intoc option because see thesis.tex and leave away pageref, because we use custom commands that do this (see below)
+                                                  %This requires makeindex during compilation see nomencl manual for commandline
+\makenomenclature
+\renewcommand{\nomname}{Abbreviations}
+
+\widowpenalty=300
+\clubpenalty=300
+
+
+\usepackage{fancyhdr}        
+%\addtolength{\headwidth}{\marginparsep}
+%\addtolength{\headwidth}{\marginparwidth}
+%\addtolength{\headwidth}{-0.5in}
+\setlength{\headwidth}{\textwidth}
+\renewcommand{\chaptermark}[1]{%
+\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{%
+\markright{\thesection.\ #1}{}}
+\fancyhf{}  %delete old header settings
+\fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[LO]{\bfseries\rightmark}
+\fancyhead[RE]{\bfseries\leftmark}
+\fancyhead[LE,RO]{\bfseries\thepage}
+\renewcommand{\headrulewidth}{0.8pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.8pt} %make space for the rule
+
+%%Bibliography
+\usepackage{natbib}
+\bibliographystyle{natbib.bst}      %Not sure where this came from (Oxford Bioinformatics Journal?), slightly edited in particular to use websites
+\setlength{\bibsep}{2pt}            %Spacing between entries in the bibliography, zero is too hard
+
+%%Listings
+\usepackage{minted}                 %Better sourcecode highlighting, requires shellescape during compilation
+\renewcommand\listingscaption{Code} %Call listings Code not Listing
+
+%%Hyperref
+\usepackage[bookmarks=true, linktocpage=true, backref=page]{hyperref} % linktocpage will put the links in toc on the section numbers not on the whole text.
+                                                                      % That will force the line not to break which would make it very ugly
+\hypersetup{
+    unicode=true,             % non-Latin characters in Acrobats bookmarks
+    pdftoolbar=true,          % show Acrobats toolbar? 
+    pdfmenubar=true,          % show Acrobats menu?
+    pdffitwindow=false,       % window fit to page when opened
+    pdfstartview={Fit},       % fits the width of the page to the window
+    pdftitle={\titleFull},    % the title
+    pdfauthor={\authorFullName},  % the author
+    %pdfsubject={Subject},    % subject of the document
+    %pdfcreator={Creator},    % creator of the document
+    %pdfproducer={Producer},  % producer of the document
+    pdfkeywords={some, keys}, % TODO list of keywords
+    pdfnewwindow=true,        % links in new window
+    colorlinks=false,         % false: boxed links; true: colored links
+    linkcolor=red,            % color of internal links
+    citecolor=green,          % color of links to bibliography
+%     filecolor=magenta,      % color of file links
+    urlcolor=cyan             % color of external links
+}
+
+%%%% these patches ensure that the backrefs point to the actual occurrences of the citations in the text, not just the page or section in which they appeared
+%%%% http://tex.stackexchange.com/questions/54541/precise-back-reference-target-with-hyperref-and-backref
+%%%% BEGIN BACKREF DIRECT PATCH, apply these AFTER loading hyperref package with appropriate backref option
+% The following options are provided for the patch, currently with a poor interface!
+% * If there are multiple cites on the same (page|section) (depending on backref mode),
+%   should we show only the first one or should we show them all?
+\newif\ifbackrefshowonlyfirst
+% \backrefshowonlyfirstfalse
+\backrefshowonlyfirsttrue
+%%%% end of options
+%
+% hyperref is essential for this patch to make any sense, so it is not unreasonable to request it be loaded before applying the patch
+\makeatletter
+% 1. insert a phantomsection before every cite, so hyperref has something to target
+%    * in case natbib is loaded. hyperref provides an appropriate hook so this should be safe, and we don't even need to check if natbib is loaded!
+\let\BR@direct@old@hyper@natlinkstart\hyper@natlinkstart
+\renewcommand*{\hyper@natlinkstart}{\phantomsection\BR@direct@old@hyper@natlinkstart}% note that the anchor will appear after any brackets at the start of the citation, but that's not really a big issue?
+%    * if natbib isn't used, backref lets \@citex to \BR@citex during \AtBeginDocument
+%      so just patch \BR@citex
+\let\BR@direct@oldBR@citex\BR@citex
+\renewcommand*{\BR@citex}{\phantomsection\BR@direct@oldBR@citex}%
+
+% 2. if using page numbers, show the page number but still hyperlink to the phantomsection instead of just the page!
+\long\def\hyper@page@BR@direct@ref#1#2#3{\hyperlink{#3}{#1}}
+
+% check which package option the user loaded (pages (hyperpageref) or sections (hyperref)?)
+\ifx\backrefxxx\hyper@page@backref
+    % they wanted pages! make sure they get our re-definition
+    \let\backrefxxx\hyper@page@BR@direct@ref
+    \ifbackrefshowonlyfirst
+        %\let\backrefxxxdupe\hyper@page@backref% test only the page number
+        \newcommand*{\backrefxxxdupe}[3]{#1}% test only the page number
+    \fi
+\else
+    \ifbackrefshowonlyfirst
+        \newcommand*{\backrefxxxdupe}[3]{#2}% test only the section name
+    \fi
+\fi
+
+% 3. now make sure that even if there is no numbered section, the hyperref's still work instead of going to the start of the document!
+\RequirePackage{etoolbox}
+\patchcmd{\Hy@backout}{Doc-Start}{\@currentHref}{}{\errmessage{I can't seem to patch backref}}
+\makeatother
+%%%% END BACKREF PATCHES
+
+\usepackage{cleveref}			%Use \cref and \Cref to automatically writhe 'Table' part of the reference, also use varioref for even more automatism
+\Crefname{minted}{Code}{Listings}
+\crefname{minted}{code}{listings}
+\Crefname{listing}{Code}{Listings}
+\crefname{listing}{code}{listings}
+
+%%Custom commands
+\newcommand{\citeme}[1]{\Large\textsuperscript{\textbf{\textcolor{Blue}{citation needed}(#1)}}\normalsize}
+\newcommand{\al}[0]{$\alphaup$} %Since the math font is also charter, this will look good
+\newcommand{\alimp}[0]{\al-IMP\ }
+\newcommand{\alimps}[0]{\al-IMPs\ }
+\newcommand{\be}[0]{$\betaup$}
+\newcommand{\beimp}[0]{\be-IMP\ }
+\newcommand{\beimps}[0]{\be-IMPs\ }
+\newcommand{\supp}[0]{Supplementary Material\ }
+\newcommand{\angs}[0]{\,\AA}
+\newcommand{\method}[1]{\textbf{#1}}
+\newcommand{\ie}[0]{\textit{i.e.\ }}
+\newcommand{\eg}[0]{e.g.\ }
+\newcommand{\cf}[0]{cf.\ }
+\newcommand{\asf}[0]{asf.\ }
+\newcommand{\chap}[0]{cp.\ }
+\newcommand{\Naive}[0]{Na{\"i}ve\ }
+\newcommand{\id}[0]{ID\ }
+\newcommand{\ids}[0]{IDs\ }
+\newcommand{\pv}[0]{$p$-value\ }
+\newcommand{\pvs}[0]{$p$-values\ }
+\newcommand{\ev}[0]{E-value\ }
+\newcommand{\dbid}[1]{{\fontfamily{phv}\selectfont\normalsize\lowercase{#1}}}
+\newcommand{\figintro}[1]{\textbf{#1}}  %Use for first sentence (short summary) in captions
+\newcommand{\organism}[1]{\textit{#1}}  %Capitalize first letter. Write the full name first like Escherichia coli and later abbreviate to E. coli. Note the space between the two words
+\newcommand{\abbr}[2]{\phantomsection\label{abbr:#1}\nomenclature{#1}{#2, page \pageref{abbr:#1}\phantomsection\label{abbr:#1bbbb}}\hyperref[abbr:#1bbbb]{#1}}    %List pages in Abbreviations list
+% \newcommand{\abbr}[2]{\phantomsection\label{abbr:#1}\nomenclature{#1}{#2 \phantomsection\label{abbr:#1bbbb}}\mbox{\hyperref[abbr:#1bbbb]{#1}}}                  %Don't list pages
+\newcommand{\abref}[1]{\mbox{\hyperref[abbr:#1bbbb]{#1}}}
+
+%%Writing Guidelines
+% Use past tense (use present tense when talking about published papers (they are 'facts'), so basically intro present, methods past, results past (also mix as in: 'did not contain, indicating')
+  % cf. here: http://services.unimelb.edu.au/__data/assets/pdf_file/0009/471294/Using_tenses_in_scientific_writing_Update_051112.pdf
+% Use we (if any personal pronoun, ideally use none). 'One' also sounds dull, so limit usage.
+% Use active verbs more often
+% No 'as is well known' asf
+% No might/may/would, sounds like not wanting to make a clear statement
+% Don't abbreviate units when used in text (without preceding numbers)
+% No contractions
+%   this also goes for genitive ideally
+% Brevity, and keep sentences short
+% Apart from % and deg, there is a space between number and unit (see siunitx package)
+% “the fact that ...” (delete); “In order to ...” (shorten to simply “To ...”); utilize/ation (use)
+% No ()(), rewrite sentences to avoid if necessary
+% A paragraph should begin with a topic sentence that sets the stage clearly for what will follow
+% Rather than telling the reader that a result is interesting or significant, show them how it is interesting or significant. cf. http://course1.winona.edu/mdelong/ecolab/21%20suggestions.html
+% When preparing to write your results, decide on the elements of the story you wish to tell, then choose the subset of text, figures, and tables that most effectively and concisely coveys your message
+% You should use the tables and figures to illustrate points in the text, rather than making them the subject of your text. (so NOT ``Figure 4 shows'')
+% No Dangling modifiers such as: Having finished the assignment, the TV was turned on. (the subject of having finished,is not the TV! name who it was)
+% If sections/subsections or indentions of any kind, there should be at least two of it on that level
+% At least three sentences per paragraph. If not long enough and really nothing else to say, merge nonetheless and make the best out of it
+% The first non-greek letter after a greek letter at the beginning of a sentence should be capitalized: http://www.amamanualofstyle.com/browse;jsessionid=9EA19219781ADA8A8629B69513B122D5?t1=AMAMOS_SECTIONS:med-9780195176339-div1-183#
+% Abbreviations must be used 3 times or more to validate their existence
+% Try to put citations at the end of the sentence unless that would make the association unclear
+
+%%Rough correction guidelines%%
+%American English (but Oxford comma)
+
+%%Figures%%
+% Barplots, should not be too small in terms of the data they present, 2 groups is borderline
+% Do not wrap text around figures, it looks horrible. If it is important enough to get a Figure, it is important enough not to be buried in text
+% Denote sample sizes
+% The dependent variable goes on the Y axis (in particular in scatterplots)
+% Only connect data points, when the values in-between make sense (i.e. could potentially exist, we just don't have them)
+
+%%Spelling
+% aforementioned 
+% therefore  adv. 'darum' <--> therefor  adv. [form.] [law] 'dafür'

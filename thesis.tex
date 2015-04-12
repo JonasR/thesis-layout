@@ -1,0 +1,109 @@
+\input{preamble.tex}
+%%\usepackage{tmpPackages/deckblattAbschlussarbeitBioinformatik}  %Custom titlepage for Bioinformatics Bachelor/Master theses at TUM and LMU
+\usepackage{blindtext}  % TODO delete
+
+\begin{document}
+% % Custom titlepage for Bioinformatics Bachelor/Master theses at TUM and LMU
+% % \maketitlepage{Masterarbeit}
+% % {Chair: Chair title}   
+% % {Title line 1}
+% % {Title line 2}
+% % {\authorFullName}
+% % {PI}
+% % {Supervisor}
+% % {15.03.2014}
+
+\cleardoublepage
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\oddsidemargin 0.7cm    %TODO print version only, comment out for online
+\evensidemargin -0.7cm  %TODO print version only, comment out for online
+
+\onehalfspacing         %TODO check your style guidelines allow this, not the case for Bioinformatics in Munich
+
+%\input{sections/summary.tex}
+\chapter*{Abstract}
+\label{cp:summary}
+\addcontentsline{toc}{section}{Abstract}
+\blindtext
+
+\cleardoublepage
+
+% \input{sections/acknowledgements.tex}
+\chapter*{Acknowledgements}
+\label{cp:acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
+\blindtext
+
+\cleardoublepage
+
+\pdfbookmark{\contentsname}{Contents}
+\tableofcontents
+\cleardoublepage
+
+%Comment out next two lines of list of figures should not be in toc
+\phantomsection
+\addcontentsline{toc}{section}{\listfigurename}
+\listoffigures
+
+%Below from begingroup to endgroup is necessary to cleardoublepage between list of tables and figures
+%Currently they are assumed to be sufficiently large to warrant the cleardouble page. If not, comment below in
+% \begingroup
+% \let\clearpage\relax
+% \phantomsection
+% \addcontentsline{toc}{section}{\listtablename}
+
+\cleardoublepage
+
+%Comment out next two lines of list of tables should not be in toc
+\phantomsection
+\addcontentsline{toc}{section}{\listtablename}
+\listoftables
+% \endgroup
+
+\cleardoublepage
+%For the abbreviations we could use the intoc option of nomencl, however then it would appear in the toc as a chapter, since all other entries are sections
+%We define our own reference like below and leave away the intoc option
+\phantomsection
+\addcontentsline{toc}{section}{\nomname}
+\singlespacing
+\printnomenclature
+\onehalfspacing
+\cleardoublepage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\pagestyle{fancy}
+\lhead[\fancyplain{}\thepage ]{\fancyplain{} \leftmark}
+\chead{}
+\rhead[\fancyplain{} \rightmark]{\fancyplain{} \thepage}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+%%%%MAIN%%%%
+
+\lhead[\fancyplain{}\thepage ]{\fancyplain{}\rightmark}
+\chead{}
+\rhead[\fancyplain{} \leftmark]{\fancyplain{} \thepage}
+\lfoot{}
+\rfoot{}
+\cfoot{\textit{Version: \gitAbbrevHash (\gitAuthorDate)}}   %TODO comment out for final
+
+\input{samples.tex}
+% \input{sections/...}
+% \input{sections/...}
+
+\begin{appendices}
+%   \input{sections/appendix.tex}
+\end{appendices}
+
+%%%%BIBLIOGRPAHY%%%%
+\cleardoublepage
+\renewcommand{\bibname}{References}
+\footnotesize
+\bibliography{ma.bib,urls.bib}    %Multiple .bib files, e.g. to mix automatically generated ones from citation managers and manually curated ones
+\addcontentsline{toc}{chapter}{References} 
+\end{document}
