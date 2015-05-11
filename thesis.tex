@@ -38,14 +38,18 @@
 
 \cleardoublepage
 
+\microtypesetup{protrusion=false} % disables protrusion locally in the document
 \pdfbookmark{\contentsname}{Contents}
 \tableofcontents
+\microtypesetup{protrusion=true} % enables protrusion
 \cleardoublepage
 
+\microtypesetup{protrusion=false} % disables protrusion locally in the document
 %Comment out next two lines of list of figures should not be in toc
 \phantomsection
 \addcontentsline{toc}{section}{\listfigurename}
 \listoffigures
+\microtypesetup{protrusion=true} % enables protrusion
 
 %Below from begingroup to endgroup is necessary to cleardoublepage between list of tables and figures
 %Currently they are assumed to be sufficiently large to warrant the cleardouble page. If not, comment below in
@@ -56,11 +60,13 @@
 
 \cleardoublepage
 
+\microtypesetup{protrusion=false} % disables protrusion locally in the document
 %Comment out next two lines of list of tables should not be in toc
 \phantomsection
 \addcontentsline{toc}{section}{\listtablename}
 \listoftables
 % \endgroup
+\microtypesetup{protrusion=true} % enables protrusion
 
 \cleardoublepage
 %For the abbreviations we could use the intoc option of nomencl, however then it would appear in the toc as a chapter, since all other entries are sections
