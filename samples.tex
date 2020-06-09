@@ -83,3 +83,6 @@ by natbib.
 There are also automatically inserted abbreviations, they are used by simply using the word such as \abbr{TMH}{Transmembrane helix} with that command. Now, if we later want to reference to this again,
 we could use \abref{TMH} as such, but we should not overuse that, if at all. Something like once per section/chapter should be fine, in case someone crossreads the thing.  Make sure though
 that the abbreviation is introduced in the text, before being used, and that the link goes to that first introduction.
+
+\subsection{Journal article}
+To directly include the PDF of a paper (for cumulative theses) use \mintinline[breaklines,breakanywhere]{tex}{\includepdf[pages=-]{paper.pdf}}
