@@ -21,6 +21,7 @@
 \frenchspacing
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{calligra}               %Only for the dedication
 \usepackage{charter}                %Heavier font
 % \usepackage{MinionPro}            %Alternative font (part of debian package 'texlive-fonts-extra')
 % \usepackage{bookman}              %Alternative font
@@ -263,6 +264,18 @@ postproc cell content/.append style={ % see sec 3.2
 \newcommand{\abbr}[2]{\phantomsection\label{abbr:#1}\nomenclature{#1}{#2, page \pageref{abbr:#1}\phantomsection\label{abbr:#1bbbb}}\hyperref[abbr:#1bbbb]{#1}}    %List pages in Abbreviations list
 % \newcommand{\abbr}[2]{\phantomsection\label{abbr:#1}\nomenclature{#1}{#2 \phantomsection\label{abbr:#1bbbb}}\mbox{\hyperref[abbr:#1bbbb]{#1}}}                  %Don't list pages
 \newcommand{\abref}[1]{\mbox{\hyperref[abbr:#1bbbb]{#1}}}
+
+\newenvironment{dedication}
+{%\clearpage           % we want a new page
+	\thispagestyle{empty}% no header and footer
+	\vspace*{\stretch{1}}% some space at the top
+	\itshape             % the text is in italics
+	\raggedleft          % flush to the right margin
+}
+{\par % end the paragraph
+	\vspace{\stretch{3}} % space at bottom is three times that at the top
+	\clearpage           % finish off the page
+}
 
 %%Writing Guidelines
 % Use past tense (use present tense when talking about published papers (they are 'facts'), so basically intro present, methods past, results past (also mix as in: 'did not contain, indicating')
