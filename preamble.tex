@@ -122,6 +122,9 @@ postproc cell content/.append style={ % see sec 3.2
 \usepackage{epigraph}
 \setlength{\epigraphrule}{0pt}
 \setlength{\epigraphwidth}{0.8\textwidth}
+\usepackage{enumitem}					% Horizontal inline lists
+\newlist{inlinelist}{enumerate*}{1}
+\setlist*[inlinelist,1]{label=(\roman*)}
 
 \usepackage{chngcntr}
 \counterwithout{footnote}{chapter}
