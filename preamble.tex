@@ -38,7 +38,7 @@
 \SetTracking{encoding={*}, shape=sc}{40}        % some amount of tracking, around small caps
      
 %%Table of contents layout
-\usepackage[subfigure]{tocloft}
+\usepackage{tocloft}
 \renewcommand{\cfttoctitlefont}{\bfseries\lsstyle\scshape\Huge}   %Redefine look of the word 'Contents' to match with the style used for other chapters (defined below at titlesec setup)
 \usepackage{titletoc}
 \titlecontents{chapter}
@@ -109,7 +109,6 @@ postproc cell content/.append style={ % see sec 3.2
 \usepackage{varioref}                   % This has to be loaded before hyperref and before cleverref
 \usepackage{rotating}
 \usepackage{fixltx2e}                   %adds \textsubscript{}, textsuperscript should already be there
-\usepackage{subfigure}
 \usepackage[update,prepend]{epstopdf}   %Automatic eps to pdf conversion when using .eps in includegraphics
 \usepackage{gitinfo}                    %Allows access to git information from within latex
 \usepackage{setspace}                   %Allow different line spacings
@@ -118,8 +117,12 @@ postproc cell content/.append style={ % see sec 3.2
 \usepackage{chngcntr}
 \counterwithout{footnote}{chapter}
 
-\usepackage{caption}                              %Neat things with captions like the reference in bold and smaller fonts
+\usepackage{caption}								%Neat things with captions like the reference in bold and smaller fonts
+\usepackage{subcaption}							  	%The subfigure package is deprecated. Also gives us subtables
 \captionsetup{margin=0.8cm,aboveskip=8mm,labelfont=bf,labelformat=default,labelsep=period,textfont=small} %Explicit labelformat=default necessary for varioref/hyperref/caption combination
+\DeclareCaptionLabelFormat{boldparens}{\textbf{(#2)}}
+\captionsetup[sub]{subrefformat=boldparens,belowskip=6mm}
+
 \setcounter{tocdepth}{2}                          %2 should be default anyway
 \setlength{\parskip}{1ex plus 0.5ex minus 0.5ex}  %Space of a paragraph, note the variability, gives latex more room for optimization
 \setlength{\parindent}{0pt}                       %Basically a whole lot of \noindents before every paragraph ;)
