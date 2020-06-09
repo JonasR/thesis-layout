@@ -180,6 +180,14 @@ postproc cell content/.append style={ % see sec 3.2
 %% Versioning and reviewing
 \usepackage{gitinfo2}               %Allows access to git information from within latex
 									%See the manual for how to set it up https://ftp.gwdg.de/pub/ctan/macros/latex/contrib/gitinfo2/gitinfo2.pdf
+\usepackage[xcolor]{changebar}		%Needs to be defined after minted!
+\cbcolor{red}
+\usepackage{todonotes}
+\newcounter{todocounter}
+\newcommand{\todonum}[2][]
+{\stepcounter{todocounter}\todo[#1,tickmarkheight=0.2cm,size=\small]{\thetodocounter: #2}}
+\reversemarginpar
+\setlength{\marginparwidth}{2.6cm}
 
 %%Hyperref
 \usepackage[bookmarks=true, linktocpage=true, backref=page]{hyperref} % linktocpage will put the links in toc on the section numbers not on the whole text.
