@@ -116,7 +116,6 @@ postproc cell content/.append style={ % see sec 3.2
 \usepackage{varioref}                   % This has to be loaded before hyperref and before cleverref
 \usepackage{rotating}
 \usepackage[update,prepend]{epstopdf}   %Automatic eps to pdf conversion when using .eps in includegraphics
-\usepackage{gitinfo}                    %Allows access to git information from within latex
 \usepackage{setspace}                   %Allow different line spacings
 \usepackage[titletoc]{appendix}         %Provides an environment for the appendix
 \usepackage{pdfpages}					%To include PDFs
@@ -177,6 +176,10 @@ postproc cell content/.append style={ % see sec 3.2
 %%Listings
 \usepackage{minted}                 %Better sourcecode highlighting, requires shellescape during compilation
 \renewcommand\listingscaption{Code} %Call listings Code not Listing
+
+%% Versioning and reviewing
+\usepackage{gitinfo2}               %Allows access to git information from within latex
+									%See the manual for how to set it up https://ftp.gwdg.de/pub/ctan/macros/latex/contrib/gitinfo2/gitinfo2.pdf
 
 %%Hyperref
 \usepackage[bookmarks=true, linktocpage=true, backref=page]{hyperref} % linktocpage will put the links in toc on the section numbers not on the whole text.
