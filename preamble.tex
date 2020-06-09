@@ -63,9 +63,13 @@
 % {\dotfill\thepage}
 % []
 
+%%% No vertical space between entries from different chapters in LOF and LOT (added by book class by default)
+\newcommand*{\noaddvspace}{\renewcommand*{\addvspace}[1]{}}
+\addtocontents{lof}{\protect\noaddvspace}
+\addtocontents{lot}{\protect\noaddvspace}
+
 %%Headline layout
 \usepackage[sc]{titlesec}
-
 \newcommand{\chaptersize}{\fontsize{10cm}{1em}\selectfont}
 
 % \renewcommand{\thechapter}{\Roman{chapter}}
@@ -76,6 +80,7 @@
 {2.5ex}
 {\filright}
 [\vspace{2ex}\titlerule]
+\titlespacing*{\chapter}{0pt}{-15pt}{40pt} % To decrease vertical space. Make sure it lines up with the epigraph space
 
 \titleformat{\section}[hang]{
     \usefont{T1}{bch}{b}{n}\selectfont} % "bch" - Bitstream Charter, "b" - bold
@@ -84,7 +89,7 @@
     {\hspace{-0.4pt}\large \thesection\hspace{0.6em}} % code preceding the title
     [] % optional code following the title body
 \titleformat{\subsection}[hang]{\usefont{T1}{bch}{b}{n}\selectfont}{}{0em}{\hspace{-0.4pt}\normalsize \thesubsection\hspace{0.6em}}[]
-\titleformat{\subsubsection}[hang]{\usefont{T1}{bch}{b}{n}\selectfont}{}{0em}{\hspace{-0.4pt}\normalsize \thesubsubsection\hspace{0.6em}}[]
+\titleformat{\subsubsection}[hang]{\usefont{T1}{bch}{b}{n}\selectfont}{}{0em}{}[]
 % \titleformat{\subsubsubsection}[hang]{\usefont{T1}{bch}{b}{n}\selectfont}{}{0em}{\hspace{-0.4pt}\normalsize \thesubsubsubsection\hspace{0.6em}}[]
 
 %%Tables
