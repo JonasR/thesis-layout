@@ -110,6 +110,9 @@
 \cleardoublepage
 \renewcommand{\bibname}{References}
 \footnotesize
-\bibliography{ma.bib,urls.bib}    %Multiple .bib files, e.g. to mix automatically generated ones from citation managers and manually curated ones
-\addcontentsline{toc}{chapter}{References} 
+% Use below commands to include references in TOC
+%\cleardoublepage
+%\phantomsection
+%\addcontentsline{toc}{section}{\bibname}
+\bibliography{ma.bib,urls.bib} % ,manual.bib}    %Multiple .bib files, e.g. to mix automatically generated ones from citation managers and manually curated ones
 \end{document}
