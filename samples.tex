@@ -90,3 +90,33 @@ that the abbreviation is introduced in the text, before being used, and that the
 
 \subsection{Journal article}
 To directly include the PDF of a paper (for cumulative theses) use \mintinline[breaklines,breakanywhere]{tex}{\includepdf[pages=-]{paper.pdf}}
+
+\subsection{PGF plots}
+Use matplotlib's PGF backend to create natively rendering plots such as \Cref{fig:sequencingcost}. Make sure to setup the preamble in line with the document.
+
+\begin{minted}{python}
+plt.rcParams.update({
+"pgf.texsystem": "pdflatex",
+"pgf.preamble": [
+r"\usepackage[T1]{fontenc}",
+r"\usepackage[utf8]{inputenc}",
+r"\usepackage[english]{babel}",
+r"\usepackage[scaled]{helvet}",
+r"\usepackage[charter,expert]{mathdesign}",
+r"\usepackage{XCharter}",
+]
+})
+
+...
+
+fig.savefig('sequencingCost.pgf', format='pgf', transparent=True)
+plt.close(fig)
+\end{minted}
+
+\begin{figure}[t]
+	\begin{center}
+		\resizebox{0.55\linewidth}{!}{\input{./sequencingCost.pgf}}
+	\end{center}
+	\caption[\figintro{Decline in sequencing costs}]{\figintro{Decline in sequencing costs.}}
+	\label{fig:sequencingcost}
+\end{figure}
