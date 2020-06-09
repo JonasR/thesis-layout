@@ -247,11 +247,31 @@ postproc cell content/.append style={ % see sec 3.2
 \makeatother
 %%%% END BACKREF PATCHES
 
-\usepackage{cleveref}			%Use \cref and \Cref to automatically writhe 'Table' part of the reference, also use varioref for even more automatism
+\usepackage[capitalise,noabbrev]{cleveref}			%Use \cref and \Cref to automatically writhe 'Table' part of the reference, also use varioref for even more automatism
 \Crefname{minted}{Code}{Listings}
+\makeatletter
+\if@cref@capitalise
 \crefname{minted}{code}{listings}
+\else
+\crefname{minted}{Code}{Listings}
+\fi
+\makeatother
 \Crefname{listing}{Code}{Listings}
+\makeatletter
+\if@cref@capitalise
 \crefname{listing}{code}{listings}
+\else
+\crefname{listing}{Code}{Listings}
+\fi
+\makeatother
+\Crefname{subsection}{Subsection}{Subsections}
+\makeatletter
+\if@cref@capitalise
+\crefname{subsection}{Subsection}{Subsections}
+\else
+\crefname{subsection}{subsection}{subsections}
+\fi
+\makeatother
 
 %%Custom commands
 \newcommand{\citeme}[1]{\Large\textsuperscript{\textbf{\textcolor{Blue}{citation needed}(#1)}}\normalsize}
