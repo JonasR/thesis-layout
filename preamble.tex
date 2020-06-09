@@ -284,9 +284,9 @@ postproc cell content/.append style={ % see sec 3.2
 \newcommand{\supp}[0]{Supplementary Material\ }
 \newcommand{\angs}[0]{\,\AA}
 \newcommand{\method}[1]{\textbf{#1}}
-\newcommand{\ie}[0]{\textit{i.e.\ }}
-\newcommand{\eg}[0]{e.g.\ }
-\newcommand{\cf}[0]{cf.\ }
+\newcommand{\ie}[0]{i.e.,\ } % In AE almost all style guides recommend putting a comma after so let's follow that (also before btw)
+\newcommand{\eg}[0]{e.g.,\ } % Same here
+\newcommand{\cf}[0]{cf.\ } % 'Compare', not 'see'. Ideally comparison of multiple points. When in doubt, don't use
 \newcommand{\asf}[0]{asf.\ }
 \newcommand{\chap}[0]{cp.\ }
 \newcommand{\Naive}[0]{Na{\"i}ve\ }
@@ -295,7 +295,15 @@ postproc cell content/.append style={ % see sec 3.2
 \newcommand{\pv}[0]{$p$-value\ }
 \newcommand{\pvs}[0]{$p$-values\ }
 \newcommand{\ev}[0]{E-value\ }
-\newcommand{\dbid}[1]{{\fontfamily{phv}\selectfont\normalsize\lowercase{#1}}}
+\newcommand{\invitro}{\textit{in vitro\ }}
+\newcommand{\invivo}{\textit{in vivo\ }}
+\newcommand{\insilico}{\textit{in silico\ }}
+\newcommand{\dbid}[1]{{\fontfamily{phv}\selectfont\lowercase{#1}}}
+\newcommand{\seq}[1]{{\fontfamily{phv}\selectfont{#1}}}
+\newcommand{\mut}[1]{{\fontfamily{phv}\selectfont\uppercase{#1}}}
+\newcommand{\proteingenename}[1]{\lowercase{#1}} %cf. https://en.wikipedia.org/wiki/Gene_nomenclature and HUGO
+\newcommand{\proteingeneabbr}[1]{\textit{\uppercase{#1}}} %cf. https://en.wikipedia.org/wiki/Gene_nomenclature and HUGO
+\newcommand{\dmsstudyid}[1]{{#1}}
 \newcommand{\figintro}[1]{\textbf{#1}}  %Use for first sentence (short summary) in captions
 \newcommand{\organism}[1]{\textit{#1}}  %Capitalize first letter. Write the full name first like Escherichia coli and later abbreviate to E. coli. Note the space between the two words
 \newcommand{\abbr}[2]{\phantomsection\label{abbr:#1}\nomenclature{#1}{#2, page \pageref{abbr:#1}\phantomsection\label{abbr:#1bbbb}}\hyperref[abbr:#1bbbb]{#1}}    %List pages in Abbreviations list
